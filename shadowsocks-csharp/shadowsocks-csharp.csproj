@@ -1,0 +1,487 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="3rd\Caseless.Fody.1.8.3\build\Caseless.Fody.props" Condition="Exists('3rd\Caseless.Fody.1.8.3\build\Caseless.Fody.props')" />
+  <Import Project="3rd\Costura.Fody.3.3.2\build\Costura.Fody.props" Condition="Exists('3rd\Costura.Fody.3.3.2\build\Costura.Fody.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{8C02D2F7-7CDB-4D55-9F25-CD03EF4AA062}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Shadowsocks</RootNamespace>
+    <AssemblyName>TenonVPN</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <StartupObject>
+    </StartupObject>
+    <ApplicationIcon>tenon-vpn.ico</ApplicationIcon>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>ManagedMinimumRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+    <Optimize>false</Optimize>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>ManagedMinimumRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Caseless, Version=1.8.3.0, Culture=neutral, PublicKeyToken=409b3227471b0f0d, processorArchitecture=MSIL">
+      <HintPath>3rd\Caseless.Fody.1.8.3\lib\net452\Caseless.dll</HintPath>
+    </Reference>
+    <Reference Include="Costura, Version=3.3.2.0, Culture=neutral, PublicKeyToken=9919ef960d84173d, processorArchitecture=MSIL">
+      <HintPath>3rd\Costura.Fody.3.3.2\lib\net40\Costura.dll</HintPath>
+    </Reference>
+    <Reference Include="GlobalHotKey, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>3rd\GlobalHotKey.1.1.0\lib\GlobalHotKey.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>3rd\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
+    <Reference Include="System.XML" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="zxing, Version=0.16.4.0, Culture=neutral, PublicKeyToken=4e88037ac681fe60, processorArchitecture=MSIL">
+      <HintPath>3rd\ZXing.Net.0.16.4\lib\net461\zxing.dll</HintPath>
+    </Reference>
+    <Reference Include="zxing.presentation, Version=0.16.4.0, Culture=neutral, PublicKeyToken=4e88037ac681fe60, processorArchitecture=MSIL">
+      <HintPath>3rd\ZXing.Net.0.16.4\lib\net461\zxing.presentation.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CircleProgress\CircularProgressBar.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controller\HotkeyReg.cs" />
+    <Compile Include="Controller\Service\PACDaemon.cs" />
+    <Compile Include="Controller\System\Hotkeys\HotkeyCallbacks.cs" />
+    <Compile Include="Encryption\AEAD\AEADEncryptor.cs" />
+    <Compile Include="Encryption\AEAD\AEADMbedTLSEncryptor.cs" />
+    <Compile Include="Encryption\AEAD\AEADOpenSSLEncryptor.cs" />
+    <Compile Include="Encryption\AEAD\AEADSodiumEncryptor.cs" />
+    <Compile Include="Encryption\CircularBuffer\ByteCircularBuffer.cs" />
+    <Compile Include="Encryption\EncryptorBase.cs" />
+    <Compile Include="Encryption\EncryptorFactory.cs" />
+    <Compile Include="Encryption\Exception\CryptoException.cs" />
+    <Compile Include="Encryption\IEncryptor.cs" />
+    <Compile Include="Encryption\MbedTLS.cs" />
+    <Compile Include="Encryption\OpenSSL.cs" />
+    <Compile Include="Encryption\RNG.cs" />
+    <Compile Include="Encryption\Sodium.cs" />
+    <Compile Include="Encryption\Stream\StreamEncryptor.cs" />
+    <Compile Include="Encryption\Stream\StreamMbedTLSEncryptor.cs" />
+    <Compile Include="Encryption\Stream\StreamOpenSSLEncryptor.cs" />
+    <Compile Include="Encryption\Stream\StreamSodiumEncryptor.cs" />
+    <Compile Include="ImageComboBox\ComboBoxTools.cs" />
+    <Compile Include="ImageComboBox\Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ImageComboBox\Form1.designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ImageComboBox\ImageAndText.cs" />
+    <Compile Include="ImageComboBox\Properties\AssemblyInfo.cs" />
+    <Compile Include="ImageComboBox\Properties\Resources.Designer.cs" />
+    <Compile Include="ImageComboBox\Properties\Settings.Designer.cs" />
+    <Compile Include="LibP2P\p2p.cs" />
+    <Compile Include="LimitlessUI\Button_SRC.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="LimitlessUI\Button_WOC.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="LimitlessUI\FlatButton_WOC.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="LimitlessUI\Properties\AssemblyInfo.cs" />
+    <Compile Include="LimitlessUI\Switch_WOC.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="LimitlessUI\Utils_WOC.cs" />
+    <Compile Include="Model\HotKeyConfig.cs" />
+    <Compile Include="Model\ProxyConfig.cs" />
+    <Compile Include="Model\SysproxyConfig.cs" />
+    <Compile Include="Properties\Resources.Designer.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Proxy\DirectConnect.cs" />
+    <Compile Include="Proxy\HttpProxy.cs" />
+    <Compile Include="Proxy\IProxy.cs" />
+    <Compile Include="Controller\Service\AvailabilityStatistics.cs" />
+    <Compile Include="Controller\Strategy\HighAvailabilityStrategy.cs" />
+    <Compile Include="Controller\Strategy\StatisticsStrategy.cs" />
+    <Compile Include="Controller\System\AutoStartup.cs" />
+    <Compile Include="Controller\FileManager.cs" />
+    <Compile Include="Controller\Service\GFWListUpdater.cs" />
+    <Compile Include="Controller\I18N.cs" />
+    <Compile Include="Controller\Service\Listener.cs" />
+    <Compile Include="Controller\Logging.cs" />
+    <Compile Include="Controller\Service\PortForwarder.cs" />
+    <Compile Include="Controller\Service\UDPRelay.cs" />
+    <Compile Include="Controller\Service\UpdateChecker.cs" />
+    <Compile Include="Controller\Service\PACServer.cs" />
+    <Compile Include="Model\LogViewerConfig.cs" />
+    <Compile Include="Model\Server.cs" />
+    <Compile Include="Model\Configuration.cs" />
+    <Compile Include="Model\StatisticsRecord.cs" />
+    <Compile Include="Model\StatisticsStrategyConfiguration.cs" />
+    <Compile Include="Controller\Strategy\BalancingStrategy.cs" />
+    <Compile Include="Controller\Strategy\StrategyManager.cs" />
+    <Compile Include="Controller\Strategy\IStrategy.cs" />
+    <Compile Include="Controller\Service\Sip003Plugin.cs" />
+    <Compile Include="Proxy\Proxies.cs" />
+    <Compile Include="Proxy\Socks5Proxy.cs" />
+    <Compile Include="Settings.cs" />
+    <Compile Include="StringEx.cs" />
+    <Compile Include="Controller\System\Hotkeys\Hotkeys.cs" />
+    <Compile Include="Util\ProcessManagement\Job.cs" />
+    <Compile Include="Util\ProcessManagement\ThreadUtil.cs" />
+    <Compile Include="Util\Sockets\LineReader.cs" />
+    <Compile Include="Util\Sockets\SocketUtil.cs" />
+    <Compile Include="Util\Sockets\WrappedSocket.cs" />
+    <Compile Include="Util\SystemProxy\ProxyException.cs" />
+    <Compile Include="Util\SystemProxy\Sysproxy.cs" />
+    <Compile Include="Util\Util.cs" />
+    <Compile Include="Util\ViewUtils.cs" />
+    <Compile Include="View\ConfigForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\ConfigForm.Designer.cs">
+      <DependentUpon>ConfigForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controller\Service\TCPRelay.cs" />
+    <Compile Include="Controller\Service\PrivoxyRunner.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Controller\ShadowsocksController.cs" />
+    <Compile Include="Controller\System\SystemProxy.cs" />
+    <Compile Include="View\CalculationControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\CalculationControl.Designer.cs">
+      <DependentUpon>CalculationControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\HotkeySettingsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\HotkeySettingsForm.designer.cs">
+      <DependentUpon>HotkeySettingsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\LogForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\LogForm.Designer.cs">
+      <DependentUpon>LogForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\MenuViewController.cs" />
+    <Compile Include="View\ProxyForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\ProxyForm.Designer.cs">
+      <DependentUpon>ProxyForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\OutBandwidth.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\OutBandwidth.Designer.cs">
+      <DependentUpon>OutBandwidth.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\VersionControl.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\VersionControl.Designer.cs">
+      <DependentUpon>VersionControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\QRCodeSplashForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\StatisticsStrategyConfigurationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\StatisticsStrategyConfigurationForm.Designer.cs">
+      <DependentUpon>StatisticsStrategyConfigurationForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinFormAnimation\AnimationFunctions.cs" />
+    <Compile Include="WinFormAnimation\Animator.cs" />
+    <Compile Include="WinFormAnimation\Animator2D.cs" />
+    <Compile Include="WinFormAnimation\Animator3D.cs" />
+    <Compile Include="WinFormAnimation\AnimatorStatus.cs" />
+    <Compile Include="WinFormAnimation\float2D.cs" />
+    <Compile Include="WinFormAnimation\float3D.cs" />
+    <Compile Include="WinFormAnimation\FloatExtensions.cs" />
+    <Compile Include="WinFormAnimation\FPSLimiterKnownValues.cs" />
+    <Compile Include="WinFormAnimation\IAnimator.cs" />
+    <Compile Include="WinFormAnimation\KnownAnimationFunctions.cs" />
+    <Compile Include="WinFormAnimation\Path.cs" />
+    <Compile Include="WinFormAnimation\Path2D.cs" />
+    <Compile Include="WinFormAnimation\Path2DExtensions.cs" />
+    <Compile Include="WinFormAnimation\Path3D.cs" />
+    <Compile Include="WinFormAnimation\Path3DExtensions.cs" />
+    <Compile Include="WinFormAnimation\PathExtensions.cs" />
+    <Compile Include="WinFormAnimation\SafeInvoker.cs" />
+    <Compile Include="WinFormAnimation\SafeInvoker`1.cs" />
+    <Compile Include="WinFormAnimation\Timer.cs" />
+    <EmbeddedResource Include="ImageComboBox\Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ImageComboBox\Properties\Resources.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LimitlessUI\Button_WOC.resx">
+      <DependentUpon>Button_WOC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\ConfigForm.resx">
+      <DependentUpon>ConfigForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources1.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CalculationControl.resx">
+      <DependentUpon>CalculationControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\HotkeySettingsForm.resx">
+      <DependentUpon>HotkeySettingsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\LogForm.resx">
+      <DependentUpon>LogForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\ProxyForm.resx">
+      <DependentUpon>ProxyForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\OutBandwidth.resx">
+      <DependentUpon>OutBandwidth.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\VersionControl.resx">
+      <DependentUpon>VersionControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\StatisticsStrategyConfigurationForm.resx">
+      <DependentUpon>StatisticsStrategyConfigurationForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="app.manifest">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Data\libsscrypto.dll.gz" />
+    <None Include="Data\privoxy.exe.gz" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\at.png" />
+    <None Include="Resources\au.png" />
+    <None Include="Resources\br.png" />
+    <None Include="Resources\ca.png" />
+    <None Include="Resources\ch.png" />
+    <None Include="Resources\cl.png" />
+    <None Include="Resources\cn.png" />
+    <None Include="Resources\buy.png" />
+    <Content Include="Resources\connect.png" />
+    <Content Include="Resources\connected.png" />
+    <None Include="Resources\Earth.jpg" />
+    <None Include="Resources\cz.png" />
+    <None Include="Resources\de.png" />
+    <None Include="Resources\dk.png" />
+    <None Include="Resources\ee.png" />
+    <None Include="Resources\fi.png" />
+    <None Include="Resources\fr.png" />
+    <None Include="Resources\gb.png" />
+    <None Include="Resources\gr.png" />
+    <None Include="Resources\hk.png" />
+    <None Include="Resources\hr.png" />
+    <None Include="Resources\hu.png" />
+    <None Include="Resources\ie.png" />
+    <None Include="Resources\in.png" />
+    <None Include="Resources\is.png" />
+    <None Include="Resources\it.png" />
+    <None Include="Resources\kr.png" />
+    <None Include="Resources\lt.png" />
+    <None Include="Resources\lv.png" />
+    <None Include="Resources\nl.png" />
+    <None Include="Resources\no.png" />
+    <None Include="Resources\nz.png" />
+    <None Include="Resources\se.png" />
+    <None Include="Resources\sg.png" />
+    <None Include="Resources\ua.png" />
+    <None Include="Resources\us.png" />
+    <None Include="Resources\set.png" />
+    <None Include="Resources\user_set.png" />
+    <None Include="Resources\line.png" />
+    <None Include="Resources\share.png" />
+    <None Include="Resources\join_us.png" />
+    <None Include="Resources\vip.png" />
+    <None Include="Resources\no_vip.png" />
+    <Content Include="tenon-vpn.ico" />
+    <Content Include="WinFormAnimation\Icon.png" />
+    <Content Include="WinFormAnimation\readme.txt" />
+    <None Include="Data\sysproxy.exe.gz" />
+    <None Include="Data\sysproxy64.exe.gz" />
+    <None Include="ImageComboBox\Properties\Settings.settings" />
+    <None Include="packages.config" />
+    <None Include="Properties\DataSources\Shadowsocks.Model.StatisticsStrategyConfiguration.datasource" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Resources\ssw128.png" />
+    <Content Include="CircleProgress\CircularProgressBar.bmp" />
+    <Content Include="CircleProgress\Icon.png" />
+    <Content Include="Data\abp.js" />
+    <Content Include="Data\proxy.pac.txt" />
+    <Content Include="Data\zh_CN.txt" />
+    <Content Include="Data\zh_TW.txt" />
+    <Content Include="Data\ja.txt" />
+    <Content Include="Data\privoxy_conf.txt" />
+    <Content Include="Data\user-rule.txt" />
+    <None Include="FodyWeavers.xml">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Resources\ss32Fill.png" />
+    <Content Include="Resources\ss32In.png" />
+    <Content Include="Resources\ss32Out.png" />
+    <Content Include="Resources\ss32Outline.png" />
+    <Content Include="shadowsocks.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <UsingTask TaskName="CosturaCleanup" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll" TaskFactory="CodeTaskFactory">
+    <ParameterGroup>
+      <Config Output="false" Required="true" ParameterType="Microsoft.Build.Framework.ITaskItem" />
+      <Files Output="false" Required="true" ParameterType="Microsoft.Build.Framework.ITaskItem[]" />
+    </ParameterGroup>
+    <Task Evaluate="true">
+      <Reference xmlns="http://schemas.microsoft.com/developer/msbuild/2003" Include="System.Xml" />
+      <Reference xmlns="http://schemas.microsoft.com/developer/msbuild/2003" Include="System.Xml.Linq" />
+      <Using xmlns="http://schemas.microsoft.com/developer/msbuild/2003" Namespace="System" />
+      <Using xmlns="http://schemas.microsoft.com/developer/msbuild/2003" Namespace="System.IO" />
+      <Using xmlns="http://schemas.microsoft.com/developer/msbuild/2003" Namespace="System.Xml.Linq" />
+      <Code xmlns="http://schemas.microsoft.com/developer/msbuild/2003" Type="Fragment" Language="cs"><![CDATA[
+var config = XElement.Load(Config.ItemSpec).Elements("Costura").FirstOrDefault();
+
+if (config == null) return true;
+
+var excludedAssemblies = new List<string>();
+var attribute = config.Attribute("ExcludeAssemblies");
+if (attribute != null)
+    foreach (var item in attribute.Value.Split('|').Select(x => x.Trim()).Where(x => x != string.Empty))
+        excludedAssemblies.Add(item);
+var element = config.Element("ExcludeAssemblies");
+if (element != null)
+    foreach (var item in element.Value.Split(new[] { "\r\n", "\n" }, StringSplitOptions.RemoveEmptyEntries).Select(x => x.Trim()).Where(x => x != string.Empty))
+        excludedAssemblies.Add(item);
+
+var filesToCleanup = Files.Select(f => f.ItemSpec).Where(f => !excludedAssemblies.Contains(Path.GetFileNameWithoutExtension(f), StringComparer.InvariantCultureIgnoreCase));
+
+foreach (var item in filesToCleanup)
+  File.Delete(item);
+]]></Code>
+    </Task>
+  </UsingTask>
+  <Target Name="CleanReferenceCopyLocalPaths" AfterTargets="AfterBuild;NonWinFodyTarget">
+    <CosturaCleanup Config="FodyWeavers.xml" Files="@(ReferenceCopyLocalPaths->'$(OutDir)%(DestinationSubDirectory)%(Filename)%(Extension)')" />
+  </Target>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('3rd\Costura.Fody.3.3.2\build\Costura.Fody.props')" Text="$([System.String]::Format('$(ErrorText)', '3rd\Costura.Fody.3.3.2\build\Costura.Fody.props'))" />
+    <Error Condition="!Exists('3rd\Fody.4.0.0\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '3rd\Fody.4.0.0\build\Fody.targets'))" />
+    <Error Condition="!Exists('3rd\Caseless.Fody.1.8.3\build\Caseless.Fody.props')" Text="$([System.String]::Format('$(ErrorText)', '3rd\Caseless.Fody.1.8.3\build\Caseless.Fody.props'))" />
+  </Target>
+  <Import Project="3rd\Fody.4.0.0\build\Fody.targets" Condition="Exists('3rd\Fody.4.0.0\build\Fody.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
